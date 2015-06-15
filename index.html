@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app='todoapp'>
+<head>
+<title>angular todoApp</title>
+<script src="libs/angular.js"></script>
+    <!--incluse bootstrap-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">   
+    <!--include Firebase -->
+<script src='libs/firebase.js'></script>
+<script src='libs/angularfire.min.js'></script> 
+    
+<script src='libs/script.js'></script>
+<style>
+    .todo{border: none;background-color:#ffffff;}  
+    .container{width: 400px;}
+    .title{background-color:#BEB4B4;}
+</style>     
+</head>
+<body ng-controller="TodoCtrl">
+    <div class='container'>
+        <h4 class='list-group-item title'>Angular Todos</h4>
+        <!-- List of todos -->
+        <div ng-repeat="todo in todos" class='list-group-item'>
+          <input type="checkbox" ng-model="todo.done"/>
+          <input type="text" ng-model="todo.text" class='todo'/> 
+          <a href="" ng-click="move($index, 'up')"><span class='glyphicon glyphicon-arrow-up'></span></a>
+          <a href="" ng-click="move($index, 'down')"><span class='glyphicon glyphicon-arrow-down'></span></a>
+          <a href="" ng-click="removeTodo($index)"><span class='glyphicon glyphicon-remove-circle'></span></a>
+        </div>
+        <!--preview as you type -->
+        <div class='list-group-item' ng-show='todoText'>
+            <input type='checkbox' disabled='true'>
+            <input type='text' disabled='true' class='todo' placeholder='{{todoText}}'>
+        </div>
+        <!-- Add todo form -->
+        <form ng-submit="addTodo()" class='list-group-item'>
+            <input type="text" ng-model="todoText"/>
+            <input type="submit"/>
+        </form>
+    </div>
+</body>    
+</html>
